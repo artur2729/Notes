@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity() {
         generateListOfItems(items)
 
         setUpListView()
-        updateAdapter(items)
+        //updateAdapter(items)
 
         setClickOpenItemDetails()
     }
@@ -36,8 +36,8 @@ class MainActivity : AppCompatActivity() {
             items.add(
                 Notes(
                     item,
-                    "Text01_%04x".format(item),
-                    "Text02_%06x".format(item)
+                    "Text01_%02x".format(item),
+                    "Text02_%03x".format(item)
                 )
             )
         }
@@ -48,6 +48,7 @@ class MainActivity : AppCompatActivity() {
         binding.itemListView.adapter = adapter
     }
 
+    /*
     private fun updateAdapter(items: MutableList<Notes>) {
         adapter.add(items)
         adapter.add(Notes(101, "text01", "text02"))
@@ -58,6 +59,7 @@ class MainActivity : AppCompatActivity() {
             Notes(105, "text01", "text02"),
         )
     }
+     */
 
     fun onClickButtonOpenNoteDetails(view: View) {
         val intent = Intent(this, NoteDetails::class.java)
