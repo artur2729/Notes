@@ -5,11 +5,11 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import com.example.notes.databinding.NoteDetailsBinding
+import com.example.notes.databinding.ActivitySecondBinding
 
 class NoteDetails : AppCompatActivity() {
 
-    private lateinit var binding: NoteDetailsBinding
+    private lateinit var binding: ActivitySecondBinding
     private var finishIntentStatus = SECOND_ACTIVITY_ITEM_INTENT_RETURN_UPDATE
 
     override fun onCreate(savedInstanceState: Bundle?) {
