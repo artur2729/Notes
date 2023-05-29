@@ -66,11 +66,7 @@ class CustomAdapter(context: Context) : BaseAdapter() {
             binding = view.tag as NoteDetailBinding
         }
 
-        binding.idTextView.text = list[position].id.toString()
-        binding.text01TextView.text = list[position].name
-        binding.text02TextView.text = list[position].details
-        binding.creationDateTextView.text = list[position].creationDate.toString()
-        binding.updateDateTextView.text = list[position].updateDate.toString()
+        binding.item = list[position]
 
         return view
     }

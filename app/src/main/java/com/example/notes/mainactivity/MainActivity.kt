@@ -6,6 +6,7 @@ import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import com.example.notes.secondactivity.NoteDetails
 import com.example.notes.repository.Notes
 import com.example.notes.R
@@ -16,6 +17,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var adapter: CustomAdapter
     private lateinit var binding: ActivityMainBinding
+    private val activityViewModel: MainActivityViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,25 +25,21 @@ class MainActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         binding.mainActivity = this
 
-        val items = mutableListOf<Notes>()
-        generateListOfItems(items)
+        //val items = mutableListOf<Notes>()
+        //generateListOfItems(items)
 
         setUpListView()
-        //updateAdapter(items)
+
+        activityViewModel.itemsLiveData.observe(
+            this,
+            Observer { listOfItems ->
+                adapter.add(listOfItems)
+            }
+        )
+
+        activityViewModel.fetchItems()
 
         setClickOpenItemDetails()
-    }
-
-    private fun generateListOfItems(items: MutableList<Notes>) {
-        for (item in 1..10) {
-            items.add(
-                Notes(
-                    item,
-                    "Text01_%02x".format(item),
-                    "Text02_%03x".format(item)
-                )
-            )
-        }
     }
 
     private fun setUpListView() {
@@ -49,25 +47,13 @@ class MainActivity : AppCompatActivity() {
         binding.itemListView.adapter = adapter
     }
 
-    /*
-    private fun updateAdapter(items: MutableList<Notes>) {
-        adapter.add(items)
-        adapter.add(Notes(101, "text01", "text02"))
-        adapter.add(
-            Notes(102, "text01", "text02"),
-            Notes(103, "text01", "text02"),
-            Notes(104, "text01", "text02"),
-            Notes(105, "text01", "text02"),
-        )
-    }
-     */
-
     fun onClickButtonOpenNoteDetails(view: View) {
-        val intent = Intent(this, NoteDetails::class.java)
-        val id = adapter.getMaxId().inc()
-        intent.putExtra(MAIN_ACTIVITY_ITEM_INTENT_ID, id)
+        startActivity(Intent(this, NoteDetails::class.java))
+        //val intent = Intent(this, NoteDetails::class.java)
+        //val id = adapter.getMaxId().inc()
+        //intent.putExtra(MAIN_ACTIVITY_ITEM_INTENT_ID, id)
 
-        startActivityForResult.launch(intent)
+        //startActivityForResult.launch(intent)
     }
 
     private fun setClickOpenItemDetails() {
@@ -75,38 +61,12 @@ class MainActivity : AppCompatActivity() {
             val item: Notes = adapterView.getItemAtPosition(position) as Notes
 
             val itemIntent = Intent(this, NoteDetails::class.java)
-            itemIntent.putExtra(MAIN_ACTIVITY_ITEM_INTENT_OBJECT, item)
+            itemIntent.putExtra(MAIN_ACTIVITY_ITEM_INTENT_OBJECT, item.id)
 
-            startActivityForResult.launch(itemIntent)
+            startActivity(itemIntent)
         }
     }
 
-    private val startActivityForResult =
-        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { resul ->
-
-            val item: Notes?
-
-            when (resul.resultCode) {
-                NoteDetails.SECOND_ACTIVITY_ITEM_INTENT_RETURN_NEW -> {
-                    item = getExtraFromParcelable(
-                        resul.data,
-                        NoteDetails.SECOND_ACTIVITY_ITEM_INTENT_RETURN_OBJECT
-                    )
-
-                    if (item != null) {
-                        adapter.add(item)
-                    }
-                }
-
-                NoteDetails.SECOND_ACTIVITY_ITEM_INTENT_RETURN_UPDATE -> {
-                    item = getExtraFromParcelable(
-                        resul.data,
-                        NoteDetails.SECOND_ACTIVITY_ITEM_INTENT_RETURN_OBJECT
-                    )
-                    adapter.update(item)
-                }
-            }
-        }
 
     companion object {
         const val MAIN_ACTIVITY_ITEM_INTENT_OBJECT = "package com.example.notes_item_intent_id"
