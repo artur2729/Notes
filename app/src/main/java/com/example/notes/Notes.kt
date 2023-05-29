@@ -1,15 +1,18 @@
 package com.example.notes
 
+import android.os.Parcelable
 import kotlinx.parcelize.IgnoredOnParcel
+import kotlinx.parcelize.Parcelize
 import java.time.LocalDateTime
 
+@Parcelize
 data class Notes(
     private val _id: Int,
     private var _name: String,
     private var _details: String,
     private val _creationDate: LocalDateTime = LocalDateTime.now(),
     private var _updateDate: LocalDateTime = LocalDateTime.now()
-){
+): Parcelable {
     @IgnoredOnParcel
     var id = this._id
         private set
