@@ -1,11 +1,15 @@
-package com.example.notes
+package com.example.notes.secondactivity
 
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import com.example.notes.repository.Notes
+import com.example.notes.R
 import com.example.notes.databinding.NoteDetailsBinding
+import com.example.notes.getExtraFromParcelable
+import com.example.notes.mainactivity.MainActivity
 
 class NoteDetails : AppCompatActivity() {
 

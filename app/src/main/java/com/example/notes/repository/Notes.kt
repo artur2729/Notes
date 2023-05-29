@@ -1,4 +1,4 @@
-package com.example.notes
+package com.example.notes.repository
 
 import android.os.Parcelable
 import kotlinx.parcelize.IgnoredOnParcel

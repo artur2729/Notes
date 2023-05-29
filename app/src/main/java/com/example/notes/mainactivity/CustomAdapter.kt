@@ -1,10 +1,11 @@
-package com.example.notes
+package com.example.notes.mainactivity
 
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
+import com.example.notes.repository.Notes
 import com.example.notes.databinding.NoteDetailBinding
 
 class CustomAdapter(context: Context) : BaseAdapter() {

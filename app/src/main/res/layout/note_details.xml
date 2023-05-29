@@ -7,11 +7,11 @@
 
         <variable
             name="item"
-            type="com.example.notes.Notes" />
+            type="com.example.notes.repository.Notes" />
 
         <variable
             name="secondActivity"
-            type="com.example.notes.NoteDetails" />
+            type="com.example.notes.secondactivity.NoteDetails" />
     </data>
 
     <RelativeLayout

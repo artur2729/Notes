@@ -5,7 +5,7 @@
 
         <variable
             name="item"
-            type="com.example.notes.Notes" />
+            type="com.example.notes.repository.Notes" />
     </data>
 
     <LinearLayout
