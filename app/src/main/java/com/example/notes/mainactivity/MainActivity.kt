@@ -3,15 +3,14 @@ package com.example.notes.mainactivity
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import com.example.notes.secondactivity.NoteDetails
 import com.example.notes.repository.Notes
 import com.example.notes.R
 import com.example.notes.databinding.ActivityMainBinding
-import com.example.notes.getExtraFromParcelable
 
 class MainActivity : AppCompatActivity() {
 
