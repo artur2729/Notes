@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
-import com.example.notes.databinding.ItemBinding
+import com.example.notes.databinding.NoteDetailBinding
 
 class CustomAdapter(context: Context) : BaseAdapter() {
 
@@ -55,14 +55,14 @@ class CustomAdapter(context: Context) : BaseAdapter() {
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         var view = convertView
-        val binding: ItemBinding
+        val binding: NoteDetailBinding
 
         if (view == null) {
-            binding = ItemBinding.inflate(inflater, parent, false)
+            binding = NoteDetailBinding.inflate(inflater, parent, false)
             view = binding.root
             view.tag = binding
         } else {
-            binding = view.tag as ItemBinding
+            binding = view.tag as NoteDetailBinding
         }
 
         binding.idTextView.text = list[position].id.toString()
