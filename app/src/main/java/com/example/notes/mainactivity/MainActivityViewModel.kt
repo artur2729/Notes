@@ -19,4 +19,8 @@ class MainActivityViewModel : ViewModel() {
         }
         _itemsLiveData.value = NoteRepository.instance.items
     }
+
+    fun searchNotes(query: String) {
+        _itemsLiveData.value = NoteRepository.instance.getSearchResults(query)
+    }
 }

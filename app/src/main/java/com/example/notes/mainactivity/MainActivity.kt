@@ -7,6 +7,7 @@ import android.widget.SearchView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.activity.viewModels
+import androidx.core.widget.doAfterTextChanged
 import androidx.lifecycle.Observer
 import com.example.notes.secondactivity.NoteDetails
 import com.example.notes.repository.Notes
@@ -25,9 +26,6 @@ class MainActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         binding.mainActivity = this
 
-        //val items = mutableListOf<Notes>()
-        //generateListOfItems(items)
-
         setUpListView()
 
         activityViewModel.itemsLiveData.observe(
@@ -38,6 +36,8 @@ class MainActivity : AppCompatActivity() {
         )
 
         setClickOpenItemDetails()
+
+        binding.searchEditText.doAfterTextChanged { activityViewModel.searchNotes(binding.searchEditText.text.toString()) }
     }
 
     override fun onResume() {
