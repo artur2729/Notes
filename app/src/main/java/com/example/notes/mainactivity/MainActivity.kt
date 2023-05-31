@@ -25,9 +25,6 @@ class MainActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         binding.mainActivity = this
 
-        //val items = mutableListOf<Notes>()
-        //generateListOfItems(items)
-
         setUpListView()
 
         activityViewModel.itemsLiveData.observe(
@@ -38,11 +35,6 @@ class MainActivity : AppCompatActivity() {
         )
 
         setClickOpenItemDetails()
-
-        binding.searchButton.setOnClickListener {
-            val query = binding.searchEditText.text.toString()
-            activityViewModel.searchNotes(query)
-        }
     }
 
     override fun onResume() {
@@ -57,6 +49,11 @@ class MainActivity : AppCompatActivity() {
 
     fun onClickButtonOpenNoteDetails(view: View) {
         startActivity(Intent(this, NoteDetails::class.java))
+    }
+
+    fun onClickSearchButton(view: View){
+            val query = binding.searchEditText.text.toString()
+            activityViewModel.searchNotes(query)
     }
 
     private fun setClickOpenItemDetails() {
