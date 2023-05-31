@@ -30,6 +30,10 @@ class NoteRepository {
         items.addAll(generateListOfItems())
     }
 
+    fun getSearchResults(query: String): List<Notes> {
+        return items.filter { it.name.contains(query, ignoreCase = true) }
+    }
+
     private fun generateListOfItems(): List<Notes> {
         val list = mutableListOf<Notes>()
 

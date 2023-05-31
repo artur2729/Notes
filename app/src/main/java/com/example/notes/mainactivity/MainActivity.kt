@@ -38,6 +38,11 @@ class MainActivity : AppCompatActivity() {
         )
 
         setClickOpenItemDetails()
+
+        binding.searchButton.setOnClickListener {
+            val query = binding.searchEditText.text.toString()
+            activityViewModel.searchNotes(query)
+        }
     }
 
     override fun onResume() {
