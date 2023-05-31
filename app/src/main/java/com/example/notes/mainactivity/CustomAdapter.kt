@@ -25,6 +25,7 @@ class CustomAdapter(context: Context) : BaseAdapter() {
     }
 
     fun add(items: List<Notes>) {
+        list.clear()
         list.addAll(items)
         notifyDataSetChanged()
     }
