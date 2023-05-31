@@ -7,6 +7,7 @@ import android.widget.SearchView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.activity.viewModels
+import androidx.core.widget.doAfterTextChanged
 import androidx.lifecycle.Observer
 import com.example.notes.secondactivity.NoteDetails
 import com.example.notes.repository.Notes
@@ -35,6 +36,8 @@ class MainActivity : AppCompatActivity() {
         )
 
         setClickOpenItemDetails()
+
+        binding.searchEditText.doAfterTextChanged { activityViewModel.searchNotes(binding.searchEditText.text.toString()) }
     }
 
     override fun onResume() {
@@ -49,11 +52,6 @@ class MainActivity : AppCompatActivity() {
 
     fun onClickButtonOpenNoteDetails(view: View) {
         startActivity(Intent(this, NoteDetails::class.java))
-    }
-
-    fun onClickSearchButton(view: View){
-            val query = binding.searchEditText.text.toString()
-            activityViewModel.searchNotes(query)
     }
 
     private fun setClickOpenItemDetails() {
