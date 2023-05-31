@@ -3,6 +3,7 @@ package com.example.notes.mainactivity
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.SearchView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.activity.viewModels
@@ -36,9 +37,12 @@ class MainActivity : AppCompatActivity() {
             }
         )
 
-        activityViewModel.fetchItems()
-
         setClickOpenItemDetails()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        activityViewModel.fetchItems()
     }
 
     private fun setUpListView() {
@@ -48,11 +52,6 @@ class MainActivity : AppCompatActivity() {
 
     fun onClickButtonOpenNoteDetails(view: View) {
         startActivity(Intent(this, NoteDetails::class.java))
-        //val intent = Intent(this, NoteDetails::class.java)
-        //val id = adapter.getMaxId().inc()
-        //intent.putExtra(MAIN_ACTIVITY_ITEM_INTENT_ID, id)
-
-        //startActivityForResult.launch(intent)
     }
 
     private fun setClickOpenItemDetails() {
@@ -60,7 +59,7 @@ class MainActivity : AppCompatActivity() {
             val item: Notes = adapterView.getItemAtPosition(position) as Notes
 
             val itemIntent = Intent(this, NoteDetails::class.java)
-            itemIntent.putExtra(MAIN_ACTIVITY_ITEM_INTENT_OBJECT, item.id)
+            itemIntent.putExtra(MAIN_ACTIVITY_ITEM_INTENT_ID, item.id)
 
             startActivity(itemIntent)
         }
@@ -68,7 +67,6 @@ class MainActivity : AppCompatActivity() {
 
 
     companion object {
-        const val MAIN_ACTIVITY_ITEM_INTENT_OBJECT = "package com.example.notes_item_intent_id"
         const val MAIN_ACTIVITY_ITEM_INTENT_ID = "package com.example.notes_item_intent_object"
     }
 }

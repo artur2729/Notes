@@ -38,22 +38,6 @@ class CustomAdapter(context: Context) : BaseAdapter() {
             }
         }
     }
-
-    fun clear() {
-        list.clear()
-        notifyDataSetChanged()
-    }
-
-    fun remove(vararg item: Notes) {
-        list.removeAll(item)
-        notifyDataSetChanged()
-    }
-
-    fun remove(items: List<Notes>) {
-        list.removeAll(items)
-        notifyDataSetChanged()
-    }
-
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         var view = convertView
         val binding: NoteDetailBinding

@@ -22,4 +22,15 @@ class NoteDetailsVewModel : ViewModel() {
             }
         }
     }
+
+    fun saveItem( item: Notes) {
+        if (item != null) {
+            if (item.id > 0) {
+                NoteRepository.instance.updateItem(item)
+            } else {
+                NoteRepository.instance.addItem(item)
+            }
+        }
+
+    }
 }

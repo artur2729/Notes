@@ -10,11 +10,11 @@ import androidx.lifecycle.Observer
 import com.example.notes.R
 import com.example.notes.databinding.NoteDetailsBinding
 import com.example.notes.mainactivity.MainActivity
+import com.example.notes.repository.Notes
 
 class NoteDetails : AppCompatActivity() {
 
     private lateinit var binding: NoteDetailsBinding
-    private var finishIntentStatus = NOTE_DETAILS_INTENT_RETURN_UPDATE
     private val activityViewModel: NoteDetailsVewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,24 +34,7 @@ class NoteDetails : AppCompatActivity() {
 
         activityViewModel.fetchItem(getIntentExtra())
 
-        getIntentExtra()
-    }
-
-    override fun onSaveInstanceState(outState: Bundle) {
-        outState.run {
-            putParcelable(NOTE_DETAILS_SAVE_INSTANCE_STATE, binding.item)
-            putInt(NOTE_DETAILS_FINISH_INTENT_STATUS, finishIntentStatus)
-        }
-        super.onSaveInstanceState(outState)
-    }
-
-    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
-        super.onRestoreInstanceState(savedInstanceState)
-
-        with(savedInstanceState) {
-            binding.item = getParcelable(NOTE_DETAILS_SAVE_INSTANCE_STATE)
-            finishIntentStatus = this.getInt(NOTE_DETAILS_FINISH_INTENT_STATUS)
-        }
+        //getIntentExtra()
     }
 
     private fun getIntentExtra()=
@@ -62,16 +45,9 @@ class NoteDetails : AppCompatActivity() {
     }
 
     fun onClickSaveButton() {
-
-        val finishIntent = Intent()
-        finishIntent.putExtra(NOTE_DETAILS_INTENT_RETURN_OBJECT, binding.item)
-
-        if (binding.idEditText.text.toString().toInt() < 0) {
-            finishIntentStatus = RESULT_CANCELED
-        }
-
-        setResult(finishIntentStatus, finishIntent)
+        activityViewModel.saveItem(binding.item as Notes)
         finish()
+
     }
 
     companion object {
